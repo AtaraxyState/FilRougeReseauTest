@@ -87,6 +87,10 @@ public class NamedClientStream : MonoBehaviour {
         {
             Console.WriteLine("SocketException: {0}", e);
         }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+        }
 
         Console.WriteLine("\n Press Enter to continue...");
         Console.Read();

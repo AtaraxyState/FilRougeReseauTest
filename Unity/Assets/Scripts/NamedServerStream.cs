@@ -26,13 +26,18 @@ public class NamedServerStream : MonoBehaviour {
 	void Update () {
     }
 
+    private void UpdateText(string s)
+    {
+        DebugText.text = s;
+    }
+
     public void ListenForMessages(int port)
     {
         TcpListener server = null;
         try
         {
             // Set the TcpListener on port 13000.
-            IPAddress localAddr = IPAddress.Parse("127.0.0.1");
+            IPAddress localAddr = IPAddress.Parse("192.168.1.11");
 
             // TcpListener server = new TcpListener(port);
             server = new TcpListener(localAddr, port);
@@ -69,10 +74,9 @@ public class NamedServerStream : MonoBehaviour {
                         // Translate data bytes to a ASCII string.
                         data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
                         Debug.Log(String.Format("Received: {0}", data));
-                        // DebugText.text = data;
                         // Send answer
                         byte[] msg = System.Text.Encoding.ASCII.GetBytes("Answered to " + data);
-
+                        UpdateText(data);
                         // Send back a response.
                         stream.Write(msg, 0, msg.Length);
                         Debug.Log(String.Format("Sent: {0}", data));
